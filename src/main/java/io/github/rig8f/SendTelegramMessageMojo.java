@@ -1,17 +1,22 @@
 package io.github.rig8f;
 
 import org.apache.maven.plugin.AbstractMojo;
+import org.apache.maven.plugin.MojoExecution;
 import org.apache.maven.plugin.logging.Log;
 import org.apache.maven.plugins.annotations.LifecyclePhase;
 import org.apache.maven.plugins.annotations.Mojo;
 import org.apache.maven.plugins.annotations.Parameter;
+import org.apache.maven.plugins.annotations.ResolutionScope;
 import org.apache.maven.project.MavenProject;
 
-@Mojo(name = "send", defaultPhase = LifecyclePhase.INSTALL)
+@Mojo(name = "send", defaultPhase = LifecyclePhase.INSTALL,
+        requiresDependencyResolution = ResolutionScope.COMPILE_PLUS_RUNTIME, threadSafe = true)
 public class SendTelegramMessageMojo extends AbstractMojo {
 
     @Parameter(property = "project", readonly = true)
     private MavenProject project;
+    @Parameter(property = "mojoExecution", readonly = true)
+    private MojoExecution execution;
 
     @Parameter
     private String botToken;
@@ -32,10 +37,15 @@ public class SendTelegramMessageMojo extends AbstractMojo {
         }
         if (message == null || message.isEmpty()) {
             //logger.warn("Message not provided in configuration, using default");
-            if (project != null)
-                message = "*Maven* " + project.getArtifactId() + " build finished";
-            else
-                message = "*Maven* build finished";
+            String artifact = "artifact";
+            if (project != null && project.getArtifactId() != null)
+                artifact = project.getArtifactId();
+
+            String goal = "goal";
+            if (execution != null && execution.getLifecyclePhase() != null)
+                goal = execution.getLifecyclePhase().toLowerCase();
+
+            message = "*Maven* " + artifact + " " + goal + " finished";
         }
 
         try {
