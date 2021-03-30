@@ -1,4 +1,4 @@
-package io.github.rig8f;
+package io.github.rig8f.maven.telegram;
 
 import okhttp3.*;
 import org.apache.maven.plugin.logging.Log;

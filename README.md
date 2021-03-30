@@ -27,7 +27,7 @@ For more info visit the [official documentation](https://core.telegram.org/bots/
 <plugin>
     <groupId>io.github.rig8f</groupId>
     <artifactId>telegram-maven-plugin</artifactId>
-    <version>1.1.0</version>
+    <version>1.2.0</version>
     <configuration>
         <botToken>???</botToken>
         <chatId>???</chatId>

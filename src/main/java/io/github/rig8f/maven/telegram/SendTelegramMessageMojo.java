@@ -1,4 +1,4 @@
-package io.github.rig8f;
+package io.github.rig8f.maven.telegram;
 
 import org.apache.maven.plugin.AbstractMojo;
 import org.apache.maven.plugin.MojoExecution;

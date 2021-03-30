@@ -1,4 +1,4 @@
-package io.github.rig8f;
+package io.github.rig8f.maven.telegram;
 
 import org.apache.maven.eventspy.AbstractEventSpy;
 import org.apache.maven.eventspy.EventSpy;
